@@ -4,10 +4,6 @@ var BG = (function () {
 	var self = this;
 	self.log = function(obj) {
 		console.log(obj);
-		var logEl = document.getElementById("log");
-		var txt = logEl.value;
-		txt += "\r\n" + obj;
-		logEl.value = txt;
 	}
 
 	self.sendCommand = function (commandName) {

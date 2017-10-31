@@ -101,6 +101,8 @@
 	// Listening to commands from background.js
 	chrome.extension.onMessage.addListener(
 		function (request, sender, sendResponse) {
+			var notifyStatusTimeout = 1000;
+
 			switch(request.command) {
 				case "play":
 					self.player.playVideo();
@@ -127,6 +129,7 @@
 
 				case "stat":
 					// only request for player status
+					notifyStatusTimeout = 0;
 					break;
 				default:
 					self.log("Unknown command '" + request.command + "'.");
@@ -134,7 +137,7 @@
 			}
 
 			// After every command, sending player status (after 1s wait)
-			setTimeout(self.notifyPlayerState, 1000);
+			setTimeout(self.notifyPlayerState, notifyStatusTimeout);
 		}
 	);
 })(window, document);
