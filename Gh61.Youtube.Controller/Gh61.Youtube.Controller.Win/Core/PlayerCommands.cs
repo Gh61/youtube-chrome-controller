@@ -14,5 +14,15 @@
 		/// Command to toggle playing or pased state of Player.
 		/// </summary>
 		public const string PlayPause = "PlayPause";
+
+		/// <summary>
+		/// Command to go to next video in Player.
+		/// </summary>
+		public const string GoNext = "GoNext";
+
+		/// <summary>
+		/// Command to go to previous video in Player.
+		/// </summary>
+		public const string GoPrevious = "GoPrev";
 	}
 }

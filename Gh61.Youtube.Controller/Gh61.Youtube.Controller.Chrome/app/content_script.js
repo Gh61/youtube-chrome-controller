@@ -1,6 +1,25 @@
 ﻿///<reference path="../scripts/_references.js" />
 
 (function (window, document) {
+	var commands =
+	{
+		Play: "play",
+		Pause: "pause",
+		TogglePlay: "playpause",
+		Next: "next",
+		Previous: "prev",
+		Status: "stat"
+	};
+
+	var states = {
+		0: "Ended",
+		1: "Playing",
+		2: "Paused",
+		3: "Buffering",
+		5: "Video cued"
+	};
+	states[-1] = "Unstarted";
+
 	var self = this;
 	self.log = function(text) {
 		console.log("[YoutubeController] " + text);
@@ -78,13 +97,8 @@
 		}
 	};
 	self.notifyPlayerState = function () {
-		var status = "Playing";
+		var status = states[self.player.getPlayerState()];
 		var title = "";
-
-		var state = self.player.getPlayerState();
-		if (state === -1 || state === 2) {
-			status = "Paused";
-		}
 		var titleElem = document.getElementById("watch-headline-title");
 		if (titleElem != null) {
 			title = titleElem.children[0].children[0].textContent.trim();
@@ -104,13 +118,13 @@
 			var notifyStatusTimeout = 1000;
 
 			switch(request.command) {
-				case "play":
+				case commands.Play:
 					self.player.playVideo();
 					break;
-				case "pause":
+				case commands.Pause:
 					self.player.pauseVideo();
 					break;
-				case "playpause":
+				case commands.TogglePlay:
 					var state = self.player.getPlayerState();
 					self.log("PlayerState: " + state);
 					if (state === 1) { // playing => pause
@@ -119,15 +133,14 @@
 						self.player.playVideo();
 					}
 					break;
-				case "next":
+				case commands.Next:
 					self.player.nextVideo();
 					break;
-				case "prev":
+				case commands.Previous:
 					self.player.previousVideo();
 					break;
 
-
-				case "stat":
+				case commands.Status:
 					// only request for player status
 					notifyStatusTimeout = 0;
 					break;

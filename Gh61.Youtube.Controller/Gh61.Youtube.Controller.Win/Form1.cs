@@ -47,5 +47,15 @@ namespace Gh61.Youtube.Controller.Win
 		{
 			await PlayerController.Broadcast(PlayerCommands.GetStatus);
 		}
+
+		private async void btnPrev_Click(object sender, System.EventArgs e)
+		{
+			await PlayerController.Broadcast(PlayerCommands.GoPrevious);
+		}
+
+		private async void btnNext_Click(object sender, System.EventArgs e)
+		{
+			await PlayerController.Broadcast(PlayerCommands.GoNext);
+		}
 	}
 }

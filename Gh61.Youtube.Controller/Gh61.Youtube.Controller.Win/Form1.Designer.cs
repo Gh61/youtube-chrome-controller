@@ -34,6 +34,8 @@
 			this.lblStatus = new System.Windows.Forms.Label();
 			this.lblTitle = new System.Windows.Forms.Label();
 			this.btnRefresh = new System.Windows.Forms.Button();
+			this.btnPrev = new System.Windows.Forms.Button();
+			this.btnNext = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnPlayPause
@@ -67,7 +69,7 @@
 			// lblStatus
 			// 
 			this.lblStatus.AutoSize = true;
-			this.lblStatus.Location = new System.Drawing.Point(80, 13);
+			this.lblStatus.Location = new System.Drawing.Point(56, 13);
 			this.lblStatus.Name = "lblStatus";
 			this.lblStatus.Size = new System.Drawing.Size(16, 13);
 			this.lblStatus.TabIndex = 3;
@@ -76,7 +78,7 @@
 			// lblTitle
 			// 
 			this.lblTitle.AutoSize = true;
-			this.lblTitle.Location = new System.Drawing.Point(80, 35);
+			this.lblTitle.Location = new System.Drawing.Point(56, 35);
 			this.lblTitle.Name = "lblTitle";
 			this.lblTitle.Size = new System.Drawing.Size(16, 13);
 			this.lblTitle.TabIndex = 4;
@@ -92,11 +94,33 @@
 			this.btnRefresh.UseVisualStyleBackColor = true;
 			this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
 			// 
+			// btnPrev
+			// 
+			this.btnPrev.Location = new System.Drawing.Point(12, 63);
+			this.btnPrev.Name = "btnPrev";
+			this.btnPrev.Size = new System.Drawing.Size(29, 23);
+			this.btnPrev.TabIndex = 6;
+			this.btnPrev.Text = "|<";
+			this.btnPrev.UseVisualStyleBackColor = true;
+			this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
+			// 
+			// btnNext
+			// 
+			this.btnNext.Location = new System.Drawing.Point(47, 63);
+			this.btnNext.Name = "btnNext";
+			this.btnNext.Size = new System.Drawing.Size(29, 23);
+			this.btnNext.TabIndex = 7;
+			this.btnNext.Text = ">|";
+			this.btnNext.UseVisualStyleBackColor = true;
+			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(267, 98);
+			this.Controls.Add(this.btnNext);
+			this.Controls.Add(this.btnPrev);
 			this.Controls.Add(this.btnRefresh);
 			this.Controls.Add(this.lblTitle);
 			this.Controls.Add(this.lblStatus);
@@ -123,6 +147,8 @@
 		private System.Windows.Forms.Label lblStatus;
 		private System.Windows.Forms.Label lblTitle;
 		private System.Windows.Forms.Button btnRefresh;
+		private System.Windows.Forms.Button btnPrev;
+		private System.Windows.Forms.Button btnNext;
 	}
 }
 
