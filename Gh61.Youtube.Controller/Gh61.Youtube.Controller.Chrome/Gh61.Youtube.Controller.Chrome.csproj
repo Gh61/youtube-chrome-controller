@@ -42,7 +42,11 @@
     <Content Include="app\background.html" />
     <Content Include="app\background.js" />
     <Content Include="app\content_script.js" />
-    <Content Include="app\img\icon.png" />
+    <Content Include="app\img\note_128.png" />
+    <Content Include="app\img\note_19.png" />
+    <Content Include="app\img\note_48.png" />
+    <Content Include="app\img\pause_19.png" />
+    <Content Include="app\img\play_19.png" />
     <Content Include="Properties\build\lib\Ionic.Zip.DLL" />
     <Content Include="Properties\build\lib\MSBuild.ExtensionPack.dll" />
     <Content Include="screenshots\screenshot.png" />

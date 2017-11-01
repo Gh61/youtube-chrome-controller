@@ -3,7 +3,7 @@
 
   "name": "Youtube Controller",
   "description": "This extension allows you to control youtube player directly from tray.",
-  "version": "0.3.4",
+  "version": "0.4.2",
 
 	"background": {
 		"page": "background.html"
@@ -19,11 +19,15 @@
 			"js": [ "content_script.js" ]
 		}
 	],
+  "browser_action": {
+	  "default_icon": "img/note_19.png"
+  },
   "web_accessible_resources": ["content_script.js"],
   "permissions": [
     "tabs"
   ],
-  "icons": {
-    "48": "img/icon.png"
-  }
+	"icons": {
+		"128": "img/note_128.png",
+		"48": "img/note_48.png"
+	}
 }

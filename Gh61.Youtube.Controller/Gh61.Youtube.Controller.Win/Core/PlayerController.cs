@@ -11,9 +11,9 @@ namespace Gh61.Youtube.Controller.Win.Core
 	internal class PlayerController : WebSocketBehavior
 	{
 		private static readonly IList<PlayerController> chatClients = new List<PlayerController>();
-		private readonly Action<string, string> onStatusGet;
+		private readonly Action<PlayerStatus, string> onStatusGet;
 
-		public PlayerController(Action<string, string> onStatusGet)
+		public PlayerController(Action<PlayerStatus, string> onStatusGet)
 		{
 			this.onStatusGet = onStatusGet;
 		}
@@ -108,7 +108,12 @@ namespace Gh61.Youtube.Controller.Win.Core
 				// Player is reporting current status
 				case Messages.Status:
 					var states = data.Split(';'); // data for example: "Playing;Artist - Title"
-					onStatusGet(states[0], states[1]);
+					PlayerStatus status;
+					if (!Enum.TryParse(states[0].Replace(" ", ""), true, out status))
+					{
+						status = PlayerStatus.Unstarted;
+					}
+					onStatusGet(status, states[1]);
 					break;
 			}
 		}

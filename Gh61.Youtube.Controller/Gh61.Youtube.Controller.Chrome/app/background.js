@@ -59,28 +59,53 @@ var BG = (function () {
 
 	};
 
+	self.setStatus = function(status, title) {
+		switch (status) {
+			case "Buffering":
+			case "Playing":
+				chrome.browserAction.setIcon({
+					path: "img/play_19.png"
+				});
+				break;
+			case "Paused":
+				chrome.browserAction.setIcon({
+					path: "img/pause_19.png"
+				});
+				break;
+			default:
+				chrome.browserAction.setIcon({
+					path: "img/note_19.png"
+				});
+				break;
+		}
+
+		if (self.websocket != null) {
+			self.websocket.send("STATUS:" + status + ";" + title);
+		}
+	};
+
 	// Listening to messages from tab(s)
 	chrome.extension.onMessage.addListener(
 		function(request, sender, sendResponse) {
 			self.log("Message accepted:");
 			self.log(JSON.stringify(request));
 
-			if (request.status && self.websocket != null) {
-				self.websocket.send("STATUS:" + request.status + ";" + request.title);
+			if (request.status) {
+				self.setStatus(request.status, request.title);
 			}
 		}
 	);
 
-	setInterval(function() {
+	setInterval(function () {
+		if (!self.sendCommand(commands.GetStatus)) {
+			self.setStatus("...", "...");
+		}
+
 		if (self.websocket == null) {
 			self.tryConnectWebsocket();
-		} else {
-			if (!self.sendCommand(commands.GetStatus)) {
-				self.websocket.send("STATUS:...;...");
-			}
 		}
 	},
-	10000); // every 10 seconds trying to connect to WS
+	10000); // every 10 seconds checking player status and trying to connect to WS
 	
 
 	return self;

@@ -28,6 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.btnPlayPause = new System.Windows.Forms.Button();
 			this.lbl1 = new System.Windows.Forms.Label();
 			this.lbl2 = new System.Windows.Forms.Label();
@@ -36,6 +38,7 @@
 			this.btnRefresh = new System.Windows.Forms.Button();
 			this.btnPrev = new System.Windows.Forms.Button();
 			this.btnNext = new System.Windows.Forms.Button();
+			this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.SuspendLayout();
 			// 
 			// btnPlayPause
@@ -114,6 +117,14 @@
 			this.btnNext.UseVisualStyleBackColor = true;
 			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
 			// 
+			// trayIcon
+			// 
+			this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
+			this.trayIcon.Text = "Youtube Controller";
+			this.trayIcon.Visible = true;
+			this.trayIcon.Click += new System.EventHandler(this.trayIcon_Click);
+			this.trayIcon.DoubleClick += new System.EventHandler(this.trayIcon_DoubleClick);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -128,9 +139,9 @@
 			this.Controls.Add(this.lbl1);
 			this.Controls.Add(this.btnPlayPause);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "Form1";
-			this.ShowIcon = false;
 			this.Text = "Youtube Controller";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
 			this.Load += new System.EventHandler(this.Form1_Load);
@@ -149,6 +160,7 @@
 		private System.Windows.Forms.Button btnRefresh;
 		private System.Windows.Forms.Button btnPrev;
 		private System.Windows.Forms.Button btnNext;
+		private System.Windows.Forms.NotifyIcon trayIcon;
 	}
 }
 
