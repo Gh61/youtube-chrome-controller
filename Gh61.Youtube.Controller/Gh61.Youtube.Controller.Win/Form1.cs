@@ -129,6 +129,9 @@ namespace Gh61.Youtube.Controller.Win
 
 		private void trayIcon_MouseClick(object sender, MouseEventArgs e)
 		{
+			// only react to left button (right is for menu)
+			if (e.Button != MouseButtons.Left) return;
+
 			// If is window shown - there's no need to wait
 			if (shown)
 			{
