@@ -12,6 +12,13 @@
 	};
 
 	var states = {
+		Unstarted: -1,
+		Ended: 0,
+		Playing: 1,
+		Paused: 2,
+		Buffering: 3,
+		VideoCued: 5,
+		// ----------------
 		0: "Ended",
 		1: "Playing",
 		2: "Paused",
@@ -115,7 +122,7 @@
 	// Listening to commands from background.js
 	chrome.extension.onMessage.addListener(
 		function (request, sender, sendResponse) {
-			var notifyStatusTimeout = 1000;
+			var notifyStatusTimeout = 500;
 
 			switch(request.command) {
 				case commands.Play:
@@ -127,17 +134,19 @@
 				case commands.TogglePlay:
 					var state = self.player.getPlayerState();
 					self.log("PlayerState: " + state);
-					if (state === 1) { // playing => pause
+					if (state === states.Playing) { // playing => pause
 						self.player.pauseVideo();
-					} else if(state === 2) { // paused => play
+					} else if(state === states.Ended || state === states.Paused) { // paused or ended => play
 						self.player.playVideo();
 					}
 					break;
 				case commands.Next:
 					self.player.nextVideo();
+					notifyStatusTimeout = 1500;
 					break;
 				case commands.Previous:
 					self.player.previousVideo();
+					notifyStatusTimeout = 1500;
 					break;
 
 				case commands.Status:

@@ -84,6 +84,11 @@ var BG = (function () {
 		}
 	};
 
+	// On extension icon click
+	chrome.browserAction.onClicked.addListener(function () {
+		self.sendCommand(commands.PlayPause);
+	});
+
 	// Listening to messages from tab(s)
 	chrome.extension.onMessage.addListener(
 		function(request, sender, sendResponse) {
