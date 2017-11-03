@@ -4,3 +4,6 @@ Youtube controller consists of Google Chrome extension and Windows application, 
 
 *I created this simply for listening music playlists on youtube and easy controlling player over windows tray.
 It was very uncomfortable to find chrome and the youtube tab when i wanted to pause or resume song.*
+
+The extension is available here:
+[Chrome Web Store](https://chrome.google.com/webstore/detail/youtube-controller/pahfijpgfgdfbegogmehlknhfbdhheig)
