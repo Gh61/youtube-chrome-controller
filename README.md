@@ -8,5 +8,5 @@ It was very uncomfortable to find chrome and the youtube tab when i wanted to pa
 The extension is available here:
 [Chrome Web Store](https://chrome.google.com/webstore/detail/youtube-controller/pahfijpgfgdfbegogmehlknhfbdhheig)
 
-The windows app build is here:
+The windows app installer is here:
 [youtube_controller_1000.exe](https://github.com/Gh61/youtube-chrome-controller/raw/master/Gh61.Youtube.Controller/Install/Output/youtube_controller_1000.exe)
