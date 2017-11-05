@@ -34,5 +34,29 @@ namespace Gh61.Youtube.Controller.Win.Core
 			};
 			t.Start();
 		}
+
+		/// <summary>
+		/// Sets Text property on this control, only when the new text is different than current value.
+		/// </summary>
+		public static void SetText(this Control control, string newText)
+		{
+			var oldText = control.Text;
+			if (newText != oldText)
+			{
+				control.Text = newText;
+			}
+		}
+
+		/// <summary>
+		/// Sets Text property on this toolstripitem, only when the new text is different than current value.
+		/// </summary>
+		public static void SetText(this ToolStripItem control, string newText)
+		{
+			var oldText = control.Text;
+			if (newText != oldText)
+			{
+				control.Text = newText;
+			}
+		}
 	}
 }

@@ -14,12 +14,12 @@ var BG = (function () {
 		console.log(obj);
 	}
 
-	self.sendCommand = function (commandName) {
-		var result = false;
+	self.sendCommand = function (commandName, sentCallback) {
 		// I am sending command to all tabs in all windows
 		chrome.windows.getAll({
 			populate: true
 		}, function (windows) {
+			var result = false;
 			for (var w = 0; w < windows.length; w++) {
 				for (var i = 0; i < windows[w].tabs.length; i++) {
 					var tab = windows[w].tabs[i];
@@ -32,9 +32,9 @@ var BG = (function () {
 					}
 				}
 			}
+			if(sentCallback)
+				sentCallback(result);
 		});
-
-		return result;
 	};
 
 	self.tryConnectWebsocket = function() {
@@ -102,9 +102,11 @@ var BG = (function () {
 	);
 
 	setInterval(function () {
-		if (!self.sendCommand(commands.GetStatus)) {
-			self.setStatus("...", "...");
-		}
+		self.sendCommand(commands.GetStatus, function(success) {
+			if (!success) {
+				self.setStatus("...", "...");
+			}
+		});
 
 		if (self.websocket == null) {
 			self.tryConnectWebsocket();

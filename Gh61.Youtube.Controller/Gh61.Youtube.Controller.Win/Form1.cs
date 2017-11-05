@@ -50,23 +50,27 @@ namespace Gh61.Youtube.Controller.Win
 				{
 					case PlayerStatus.Buffering:
 					case PlayerStatus.Playing:
-						this.lblStatus.Text = this.menuItemStatus.Text = Resources.Status_Playing;
+						this.lblStatus.SetText(Resources.Status_Playing);
+						this.menuItemStatus.SetText(Resources.Status_Playing);
 						this.trayIcon.Icon = Resources.play;
 						this.menuItemPlayPause.Image = Resources.pause_19;
 						break;
 					case PlayerStatus.Paused:
-						this.lblStatus.Text = this.menuItemStatus.Text = Resources.Status_Paused;
+						this.lblStatus.SetText(Resources.Status_Paused);
+						this.menuItemStatus.SetText(Resources.Status_Paused);
 						this.trayIcon.Icon = Resources.pause;
 						this.menuItemPlayPause.Image = Resources.play_19;
 						break;
 					default:
-						this.lblStatus.Text = this.menuItemStatus.Text = Resources.Status_Idle;
+						this.lblStatus.SetText(Resources.Status_Idle);
+						this.menuItemStatus.SetText(Resources.Status_Idle);
 						this.trayIcon.Icon = Resources.note;
 						this.menuItemPlayPause.Image = Resources.play_19;
 						break;
 				}
 
-				this.lblTitle.Text = this.menuItemTitle.Text = title;
+				this.lblTitle.SetText(title);
+				this.menuItemTitle.SetText(title);
 
 				var showTitleAndStatus = this.menuItemStatus.Text != Resources.Status_Idle;
 				menuItemTitle.Visible = showTitleAndStatus;
