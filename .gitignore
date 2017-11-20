@@ -289,4 +289,4 @@ __pycache__/
 
 # My ignored files and folders
 /Gh61.Youtube.Controller/Install/Source
-#/Gh61.Youtube.Controller/Install/Output
+/Gh61.Youtube.Controller/Install/Output
