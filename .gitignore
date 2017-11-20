@@ -286,4 +286,7 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# My ignored files and folders
 /Gh61.Youtube.Controller/Install/Source
+#/Gh61.Youtube.Controller/Install/Output
