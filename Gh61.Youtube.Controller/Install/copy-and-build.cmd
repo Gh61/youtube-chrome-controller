@@ -9,6 +9,7 @@ pause
 del /F /Q Source\*.*
 copy ..\Gh61.Youtube.Controller.Win\bin\Release\Gh61.Youtube.Controller.Win.exe Source\*.*
 copy ..\Gh61.Youtube.Controller.Win\bin\Release\websocket-sharp.clone.dll Source\*.*
+copy Output\.gitignore Source\*.*
 REM pause
 
 echo.

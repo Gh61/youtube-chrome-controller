@@ -24,7 +24,7 @@ MinVersion=6.0
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: Source\*; DestDir: {app}; Flags: ignoreversion
+Source: Source\*; Excludes: ".gitignore"; DestDir: {app}; Flags: ignoreversion
 
 [Icons]
 Name: "{userdesktop}\{#ApplicationName}"; Filename: "{app}\{#ExeName}"; Tasks: desktopicon
