@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Helpers.cs" />
+    <Compile Include="Core\KeyboardHook.cs" />
     <Compile Include="Core\PlayerCommands.cs" />
     <Compile Include="Core\PlayerStatus.cs" />
     <Compile Include="Form1.cs">

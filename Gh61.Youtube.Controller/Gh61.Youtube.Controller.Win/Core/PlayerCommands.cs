@@ -16,6 +16,16 @@
 		public const string PlayPause = "PlayPause";
 
 		/// <summary>
+		/// Command to start playing (if Player has video loaded).
+		/// </summary>
+		public const string Play = "Play";
+
+		/// <summary>
+		/// Command for pause playing of Player.
+		/// </summary>
+		public const string Pause = "Pause";
+
+		/// <summary>
 		/// Command to go to next video in Player.
 		/// </summary>
 		public const string GoNext = "GoNext";

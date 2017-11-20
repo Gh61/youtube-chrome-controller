@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace Gh61.Youtube.Controller.Win
 		private bool positionSet;
 		private bool doubleClickOccured;
 		private WebSocketServer server;
+		private KeyboardHook kbHook;
 
 		public Form1()
 		{
@@ -23,13 +25,16 @@ namespace Gh61.Youtube.Controller.Win
 			HideToTray();
 		}
 
-		#region Websocket server
+		#region Websocket server & Keyboard hook
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			server = new WebSocketServer(IPAddress.Loopback, 13337);
 			server.AddWebSocketService("/controller", () => new PlayerController(OnStatusGet));
 			server.Start();
+
+			kbHook = new KeyboardHook();
+			kbHook.KeyUp += KbHook_KeyUp;
 		}
 
 		private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -38,6 +43,7 @@ namespace Gh61.Youtube.Controller.Win
 			{
 				await server.Stop();
 			}
+			kbHook?.Dispose();
 		}
 
 		#endregion
@@ -46,36 +52,40 @@ namespace Gh61.Youtube.Controller.Win
 		{
 			this.InvokeIfNeeded(() =>
 			{
+				string statusText;
+
 				switch (status)
 				{
 					case PlayerStatus.Buffering:
 					case PlayerStatus.Playing:
-						this.lblStatus.SetText(Resources.Status_Playing);
-						this.menuItemStatus.SetText(Resources.Status_Playing);
+						statusText = Resources.Status_Playing;
 						this.trayIcon.Icon = Resources.play;
 						this.menuItemPlayPause.Image = Resources.pause_19;
 						break;
 					case PlayerStatus.Paused:
-						this.lblStatus.SetText(Resources.Status_Paused);
-						this.menuItemStatus.SetText(Resources.Status_Paused);
+						statusText = Resources.Status_Paused;
 						this.trayIcon.Icon = Resources.pause;
 						this.menuItemPlayPause.Image = Resources.play_19;
 						break;
 					default:
-						this.lblStatus.SetText(Resources.Status_Idle);
-						this.menuItemStatus.SetText(Resources.Status_Idle);
+						statusText = Resources.Status_Idle;
 						this.trayIcon.Icon = Resources.note;
 						this.menuItemPlayPause.Image = Resources.play_19;
 						break;
 				}
 
+				this.lblStatus.SetText(statusText);
+				this.menuItemStatus.SetText(statusText);
 				this.lblTitle.SetText(title);
 				this.menuItemTitle.SetText(title);
 
-				var showTitleAndStatus = this.menuItemStatus.Text != Resources.Status_Idle;
-				menuItemTitle.Visible = showTitleAndStatus;
-				menuItemStatus.Visible = showTitleAndStatus;
-				menuSeparator2.Visible = showTitleAndStatus;
+				var showTitleAndStatus = statusText != Resources.Status_Idle;
+				this.menuItemTitle.Visible = showTitleAndStatus;
+				this.menuItemStatus.Visible = showTitleAndStatus;
+				this.menuSeparator2.Visible = showTitleAndStatus;
+
+				var trayText = showTitleAndStatus ? $"{statusText}: {title}" : this.Text;
+				this.trayIcon.SetText(trayText);
 			});
 		}
 
@@ -154,6 +164,26 @@ namespace Gh61.Youtube.Controller.Win
 			});
 		}
 
+		private void KbHook_KeyUp(Keys key, bool shift, bool ctrl, bool alt)
+		{
+			// global hook for media keys
+			switch (key)
+			{
+				case Keys.MediaPlayPause:
+					PlayPause(kbHook, null);
+					break;
+				case Keys.MediaNextTrack:
+					PlayNext(kbHook, null);
+					break;
+				case Keys.MediaPreviousTrack:
+					PlayPrevious(kbHook, null);
+					break;
+				case Keys.MediaStop:
+					Pause(kbHook, null);
+					break;
+			}
+		}
+
 		#region Player Controll events
 
 		private async void PlayPrevious(object sender, EventArgs e)
@@ -164,6 +194,11 @@ namespace Gh61.Youtube.Controller.Win
 		private async void PlayPause(object sender, EventArgs e)
 		{
 			await PlayerController.Broadcast(PlayerCommands.PlayPause);
+		}
+
+		private async void Pause(object sender, EventArgs e)
+		{
+			await PlayerController.Broadcast(PlayerCommands.Pause);
 		}
 
 		private async void PlayNext(object sender, EventArgs e)

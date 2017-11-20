@@ -4,6 +4,8 @@ var BG = (function () {
 	var commands = {
 		"GetStatus": "stat",
 		"PlayPause": "playpause",
+		"Pause": "pause",
+		"Play": "play",
 		"GoNext": "next",
 		"GoPrev" : "prev"
 	}

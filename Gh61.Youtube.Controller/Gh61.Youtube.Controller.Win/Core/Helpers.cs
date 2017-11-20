@@ -58,5 +58,17 @@ namespace Gh61.Youtube.Controller.Win.Core
 				control.Text = newText;
 			}
 		}
+
+		/// <summary>
+		/// Sets Text property on this toolstripitem, only when the new text is different than current value.
+		/// </summary>
+		public static void SetText(this NotifyIcon control, string newText)
+		{
+			var oldText = control.Text;
+			if (newText != oldText)
+			{
+				control.Text = newText;
+			}
+		}
 	}
 }
