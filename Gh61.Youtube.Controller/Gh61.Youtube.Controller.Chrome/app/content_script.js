@@ -109,6 +109,11 @@
 		var titleElem = document.getElementById("watch-headline-title");
 		if (titleElem != null) {
 			title = titleElem.children[0].children[0].textContent.trim();
+		} else {
+			titleElem = document.querySelector("h1.title");
+			if (titleElem != null) {
+				title = titleElem.textContent.trim();
+			}
 		}
 
 		var message = {
